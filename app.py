@@ -1,9 +1,8 @@
-from random import random
 from fastapi import FastAPI, HTTPException, Request, Depends, Security
 from fastapi.responses import JSONResponse, PlainTextResponse, StreamingResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi import Limiter
 from slowapi.util import get_ipaddr
 
 import httpx, os, json #, dotenv
