@@ -6,11 +6,11 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_ipaddr
 
-import httpx, os, json, dotenv
+import httpx, os, json #, dotenv
 
 from utils import OpenaiException, ProxyResponse, generate_openai_error, is_stream_request, trim_key
 
-dotenv.load_dotenv()
+# dotenv.load_dotenv()
 
 app = FastAPI()
 security = HTTPBearer()
