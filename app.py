@@ -5,10 +5,11 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from slowapi import Limiter
 from slowapi.util import get_ipaddr
 
-import httpx, os, json #, dotenv
+import httpx, os, json
 
 from utils import OpenaiException, ProxyResponse, generate_openai_error, is_stream_request, trim_key
 
+# import dotenv
 # dotenv.load_dotenv()
 
 app = FastAPI()
@@ -48,7 +49,7 @@ async def handle_openai_error (request: Request, exc: OpenaiException) :
     code = exc.body.get('error', {}).get('code', None)
     if code == None : return ProxyResponse(str(exc.body), stream=exc.stream)
     
-    if not code in ('model_not_found', 'unsupported_country_region_territory') :
+    if not code in ('invalid_value', 'model_not_found', 'unsupported_country_region_territory') :
         update_key_status(exc.key_index, code)
     
     key = trim_key(app.state.keys[exc.key_index][0])
