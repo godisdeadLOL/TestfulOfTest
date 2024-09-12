@@ -49,6 +49,8 @@ async def handle_openai_error (request: Request, exc: OpenaiException) :
     code = exc.body.get('error', {}).get('code', None)
     if code == None : return ProxyResponse(str(exc.body), stream=exc.stream)
     
+    print(exc)
+    
     if not code in ('empty_array', 'invalid_type', 'invalid_value', 'model_not_found', 'unsupported_country_region_territory', 'context_length_exceeded', 'rate_limit_exceeded') :
         update_key_status(exc.key_index, code)
     
